@@ -10,7 +10,12 @@
 body{
     background-color: var(--secondary-color);
     touch-action: pan-y;
+    -webkit-touch-callout: none !important;
 } 
+a {
+    user-select: none;
+    -webkit-user-select: none !important; 
+}
 .startContainer{
     display: block;
     margin: 0;
