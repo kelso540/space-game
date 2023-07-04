@@ -389,3 +389,6 @@ a{
 .privacyText:hover{
     color: var(--primary-color)
 }
+.padding{
+    padding: 20px;
+}
