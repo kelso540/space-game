@@ -554,7 +554,7 @@ const startCanvas = () => { //very start of game screen settings.
 
     ctx1.fillText('Boosts', 130, 70);
     ctx1.drawImage(mc, 70, 100, 50, 50);
-    ctx1.fillText('=  Invisibility', 185, 135);
+    ctx1.fillText('=  Invisibility', 185, 135);  // x, y
     ctx1.drawImage(ba, 80, 180, 30, 50);
     ctx1.fillText('=  Overcharge', 190, 210);
     ctx1.drawImage(up, 70, 260, 50, 50);
