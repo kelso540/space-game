@@ -1,53 +1,66 @@
-document.querySelector("#root").innerHTML = `<div class="startContainer" id="startContainer"> <!-- starter container -->
-<div class="power">
-    <strong class="powerText">POWER</strong><button class="buttonPower"></button>
-</div>
+document.querySelector("#root").innerHTML = `<div class="mainContainer">
 
-<canvas id="ctx1" width="400" height="550"></canvas>
-
-<div class="shield">
-    <meter class="shieldBar" id="shield1" value="0" min="0" max="300"></meter>  
-    <!-- <br> -->
-    <meter class="backupBar" id="shield1" value="0" min="0" max="100"></meter>
-</div>
-<div class="buttons"> 
-    <button class="buttonChaff btn" id="btnListen5"><strong class="buttonText">L</strong></button>
-    <button class="buttonF btn" id="btnListen1"><strong class="buttonText">F</strong></button>
-    <button class="buttonL btn" id="btnListen3"><strong class="buttonText">M</strong></button>
-    <button class="buttonM btn" id="btnListen2"><strong class="buttonText">C</strong></button> 
-    <button class="buttonR btn" id="btnListen4"><strong class="buttonText">H</strong></button>
-    <button class="buttonDodge btn" id="btnListen7"><strong class="buttonText">D</strong></button>
-    <button class="buttonHelp btn" id="btnListen6"><strong class="buttonText">R</strong></button>
-
-</div>
-    <div id="hideA">
-    <strong class="areYouSure">Are you Sure?</strong>
-    <br>
-    <button class="buttonR padding" onclick="begin();"><strong class="buttonText">Yes</strong></button> <button class="buttonF padding" onclick="bringDownAreYouSure();"><strong class="buttonText">No</strong></button>
-</div>
-</div>
-
-<div class="container" id="container"> <!-- main game container -->
-    <div class="power">
-        <strong class="powerText">POWER</strong><button class="buttonPower"></button>
+    <div class="logoDiv">
+        <h2>SPACE GAME</h2>
+        <img src="Artwork/icons8-keyboard-96 (1).png" alt="keyboard" id="keyboardB" />
     </div>
 
-    <canvas id="ctx" width="400" height="550"></canvas>
+    <div class="startContainer" id="startContainer"> <!-- starter container -->
+        <div class="power">
+            <strong class="powerText">POWER</strong><button class="buttonPower"></button>
+        </div>
+    
+        <canvas id="ctx1" width="400" height="550"></canvas>
+    
+        <div class="shield">
+            <meter class="shieldBar" id="shield1" value="0" min="0" max="300"></meter>  
+            <!-- <br> -->
+            <meter class="backupBar" id="shield1" value="0" min="0" max="100"></meter>
+        </div>
+        <div class="buttons"> 
+            <button class="buttonChaff btn" id="btnListen5"><strong class="buttonText">L</strong></button>
+            <button class="buttonF btn" id="btnListen1"><strong class="buttonText">F</strong></button>
+            <button class="buttonL btn" id="btnListen3"><strong class="buttonText">M</strong></button>
+            <button class="buttonM btn" id="btnListen2"><strong class="buttonText">C</strong></button> 
+            <button class="buttonR btn" id="btnListen4"><strong class="buttonText">H</strong></button>
+            <button class="buttonDodge btn" id="btnListen7"><strong class="buttonText">D</strong></button>
+            <button class="buttonHelp btn" id="btnListen6"><strong class="buttonText">R</strong></button>
+        </div>
+        <div id="hideA">
+            <strong class="areYouSure">Are you Sure?</strong>
+            <br>
+            <button class="buttonR padding" onclick="begin();"><strong class="buttonText">Yes</strong></button> <button class="buttonF padding" onclick="bringDownAreYouSure();"><strong class="buttonText">No</strong></button>
+        </div>
+    </div>
+    
+    <div class="container" id="container"> <!-- main game container -->
+        <div class="power">
+            <strong class="powerText">POWER</strong><button class="buttonPower"></button>
+        </div>
+    
+        <canvas id="ctx" width="400" height="550"></canvas>
+    
+        <div class="shield">
+            <meter class="shieldBar" id="shield" value="300" min="0" max="300" low="70" high="150" optimum="300"></meter>
+            <br>
+            <meter class="backupBar" id="shield2" value="0" min="0" max="100" low="20" high="50" optimum="100"></meter>
+        </div>
+        <div class="buttons">
+            <button class="buttonL btn" id="L" onclick="moveL(ship)"><strong class="buttonText">L</strong></button>
+            <button class="buttonF btn" id="F"><strong class="buttonText">F</strong></button>
+            <button class="buttonM btn" id="changeM"><strong class="buttonText">M</strong></button>
+            <button class="buttonChaff btn" id="C"><strong class="buttonText">C</strong></button> 
+            <button class="buttonHelp btn" id="helpButton"><strong class="buttonText">H</strong></button>
+            <button class="buttonDodge btn" id="D"><strong class="buttonText">D</strong></button>
+            <button class="buttonR btn" id="R" onclick="moveR(ship)"><strong class="buttonText">R</strong></button>
+        </div>
+    </div>
 
-    <div class="shield">
-        <meter class="shieldBar" id="shield" value="300" min="0" max="300" low="70" high="150" optimum="300"></meter>
-        <br>
-        <meter class="backupBar" id="shield2" value="0" min="0" max="100" low="20" high="50" optimum="100"></meter>
+    <div class="logoDiv">
+        <img src="Artwork/icons8-keyboard-96.png" alt="keyboard" id="keyboardA" />
+        <h2>SPACE GAME</h2>
     </div>
-    <div class="buttons">
-        <button class="buttonL btn" id="L" onclick="moveL(ship)"><strong class="buttonText">L</strong></button>
-        <button class="buttonF btn" id="F"><strong class="buttonText">F</strong></button>
-        <button class="buttonM btn" id="changeM"><strong class="buttonText">M</strong></button>
-        <button class="buttonChaff btn" id="C"><strong class="buttonText">C</strong></button> 
-        <button class="buttonHelp btn" id="helpButton"><strong class="buttonText">H</strong></button>
-        <button class="buttonDodge btn" id="D"><strong class="buttonText">D</strong></button>
-        <button class="buttonR btn" id="R" onclick="moveR(ship)"><strong class="buttonText">R</strong></button>
-    </div>
+
 </div>
 
 <div class="f5">
@@ -59,6 +72,16 @@ document.querySelector("#root").innerHTML = `<div class="startContainer" id="sta
     <input type="text" id="delTime" class="buttonL" value="0" readonly>
     <input type="text" id="health" class="buttonL" value="0" readonly>
 </div>`; 
+
+setInterval(()=>{
+    document.getElementById("keyboardA").src = "Artwork/icons8-keyboard-96.png"; 
+    document.getElementById("keyboardB").src = "Artwork/icons8-keyboard-96 (1).png"; 
+    setTimeout(()=>{
+        document.getElementById("keyboardA").src = "Artwork/icons8-keyboard-96 (1).png"; 
+        document.getElementById("keyboardB").src = "Artwork/icons8-keyboard-96.png"; 
+    }, 2500)
+}, 4000)
+
 const font = "Arial";
 const fontSize = "16px"; 
 const ctxContext = document.getElementById("ctx");
@@ -859,10 +882,10 @@ const start = () => { //main game loop 40ms interval
     mainTimerCounter.toString(); //so I remember how to change a value to a string. 
     mainTimerCounterDisplay.toString();
     ctx.fillText(mainTimerCounterDisplay + " : " + mainCounter0 + mainTimerCounter, 200, 50);
-    ctx.fillText(enemyDText, 150, 510);
-    ctx.fillText(enemyD, 265, 510);  //displays enemy's destroyed. 
-    ctx.fillText(enemyEscapeText, 157, 540); 
-    ctx.fillText(enemyEscape, 265, 540);  //displays enemy's escaped.
+    ctx.fillText(enemyDText, 170, 510);
+    ctx.fillText(enemyD, 287, 510);  //displays enemy's destroyed. 
+    ctx.fillText(enemyEscapeText, 177, 540); 
+    ctx.fillText(enemyEscape, 288, 540);  //displays enemy's escaped.
     document.getElementById("time").value = timeBox;
     document.getElementById("health").value = shield;
 
