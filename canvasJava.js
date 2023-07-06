@@ -1,26 +1,107 @@
+document.querySelector("#root").innerHTML = `<div class="startContainer" id="startContainer"> <!-- starter container -->
+<div class="power">
+    <strong class="powerText">POWER</strong><button class="buttonPower"></button>
+</div>
+
+<canvas id="ctx1" width="400" height="550"></canvas>
+
+<div class="shield">
+    <meter class="shieldBar" id="shield1" value="0" min="0" max="300"></meter>  
+    <!-- <br> -->
+    <meter class="backupBar" id="shield1" value="0" min="0" max="100"></meter>
+</div>
+<div class="buttons"> 
+    <button class="buttonChaff btn" id="btnListen5"><strong class="buttonText">L</strong></button>
+    <button class="buttonF btn" id="btnListen1"><strong class="buttonText">F</strong></button>
+    <button class="buttonL btn" id="btnListen3"><strong class="buttonText">M</strong></button>
+    <button class="buttonM btn" id="btnListen2"><strong class="buttonText">C</strong></button> 
+    <button class="buttonR btn" id="btnListen4"><strong class="buttonText">H</strong></button>
+    <button class="buttonDodge btn" id="btnListen7"><strong class="buttonText">D</strong></button>
+    <button class="buttonHelp btn" id="btnListen6"><strong class="buttonText">R</strong></button>
+
+</div>
+    <div id="hideA">
+    <strong class="areYouSure">Are you Sure?</strong>
+    <br>
+    <button class="buttonR padding" onclick="begin();"><strong class="buttonText">Yes</strong></button> <button class="buttonF padding" onclick="bringDownAreYouSure();"><strong class="buttonText">No</strong></button>
+</div>
+</div>
+
+<div class="container" id="container"> <!-- main game container -->
+    <div class="power">
+        <strong class="powerText">POWER</strong><button class="buttonPower"></button>
+    </div>
+
+    <canvas id="ctx" width="400" height="550"></canvas>
+
+    <div class="shield">
+        <meter class="shieldBar" id="shield" value="300" min="0" max="300" low="70" high="150" optimum="300"></meter>
+        <br>
+        <meter class="backupBar" id="shield2" value="0" min="0" max="100" low="20" high="50" optimum="100"></meter>
+    </div>
+    <div class="buttons">
+        <button class="buttonL btn" id="L" onclick="moveL(ship)"><strong class="buttonText">L</strong></button>
+        <button class="buttonF btn" id="F"><strong class="buttonText">F</strong></button>
+        <button class="buttonM btn" id="changeM"><strong class="buttonText">M</strong></button>
+        <button class="buttonChaff btn" id="C"><strong class="buttonText">C</strong></button> 
+        <button class="buttonHelp btn" id="helpButton"><strong class="buttonText">H</strong></button>
+        <button class="buttonDodge btn" id="D"><strong class="buttonText">D</strong></button>
+        <button class="buttonR btn" id="R" onclick="moveR(ship)"><strong class="buttonText">R</strong></button>
+    </div>
+</div>
+
+<div class="f5">
+    <p class="footerText">&copy; 2022 kelsojacks@outlook.com</p>
+</div>
+
+<div class="hide">
+    <input type="text" id="time" class="buttonL" value="0" readonly>
+    <input type="text" id="delTime" class="buttonL" value="0" readonly>
+    <input type="text" id="health" class="buttonL" value="0" readonly>
+</div>`; 
+const font = "Arial";
+const fontSize = "16px"; 
 const ctxContext = document.getElementById("ctx");
 const ctx = ctxContext.getContext("2d");
-ctx.font = "20px Arial";
+ctx.font = `${fontSize} ${font}`;
 ctx.textAlign = "center";
 const ctx1Context = document.getElementById("ctx1");
 const ctx1 = ctx1Context.getContext("2d"); 
-ctx1.font = "20px Arial";
+ctx1.font = `${fontSize} ${font}`;
 ctx1.textAlign = "center";
 
 //CANVAS AND GAME SIZE ADJUSTMENTS **
-const WIDTH = 1000;
-const HEIGHT = 400;
-const enemySpawnMaxWidth = 960;
-const shipYStart = 330;
-const startCanvasBounceShipBottomEnd = 340;
-const shipEscapeDestroyTextDisplayHeight = 390; 
-const missileStartOnShipHeight = 300;
-const counterEndCanvasA = 397;
-const counterEndCanvasB = 398; 
-const missileChangeFromShipCanvasHeight = 390;
+const WIDTH = 400;
+const HEIGHT = 550;
+const enemySpawnMaxWidth = 360;
+const shipYStart = 430;
+const shipXStart = 100;
+const startCanvasBounceShipBottomEnd = 490;
+const shipEscapeDestroyTextDisplayHeight = 500; 
+const missileStartOnShipHeight = 400;
+const counterEndCanvasA = 497;
+const counterEndCanvasB = 498; 
+const missileChangeFromShipCanvasHeight = 490;
 const missileOnShipHeight = 400; 
-const playerWrapScreenStart = 980; 
+const playerWrapScreenStart = 380;
+const bounceShipRandomNumber = 100; 
+const canvasCenter = 200; 
 // *********************************
+
+//SPAWN FREQUENCIES **
+let enemyFrequency = 200;  
+let fireFrequency = 250;
+let upgradeFrequency = 2000; 
+let shieldUpgradeFrequency = 3000;
+let fireUpgradeFrequency = 3500;
+let midEnemyFrequency = 500;
+let midFireFrequency = 550;
+let missileEnemyFrequency = 700;
+let missileFireFrequency = 750;
+let asteroidFrequency = 1000; 
+let bossFireFrequency = 2100;    
+let bossEnemyFrequency = 2000;
+// *********************
 
 const backupShip = new Image();
 backupShip.src = "Artwork/backupShip.png";
@@ -79,21 +160,6 @@ let movePL = false;
 let movePR = false;
 let b;
 let time = new Date(); 
-
-//SPAWN FREQUENCIES **
-let enemyFrequency = 200;  
-let fireFrequency = 250;
-let upgradeFrequency = 2000; 
-let shieldUpgradeFrequency = 3000;
-let fireUpgradeFrequency = 3500;
-let midEnemyFrequency = 500;
-let midFireFrequency = 550;
-let missileEnemyFrequency = 700;
-let missileFireFrequency = 750;
-let asteroidFrequency = 1000; 
-let bossFireFrequency = 2100;    
-let bossEnemyFrequency = 2000;
-// *********************
 
 let enemyShipX = {};
 let enemyShipY = {};
@@ -165,7 +231,7 @@ let startTextA = "Invasion!";
 let startTextB = "Earth is being invaded!";
 let startTextC = "You are the first to meet the enemy!";
 let startTextD = "Destroy as many as possible!";
-let startTextE = "Do your best, good luck!";
+// let startTextE = "Do your best, good luck!";
 let startTextH = "Click any button on screen to start!";
 let enemyDText = "Enemies Destroyed ";
 let enemyD = 0;
@@ -249,11 +315,11 @@ class Upgrade extends Asteroid { };
 class Explosive extends Asteroid { };
 class Chaff extends Asteroid { };
 //start enemy ship***************
-const startShip = new Ship(40, 60, fb, "E", 2, Math.floor((Math.random() * 800) + 100), Math.floor((Math.random() * 200) + 100), 4); 
+const startShip = new Ship(40, 60, fb, "E", 2, Math.floor((Math.random() * bounceShipRandomNumber) + 10), Math.floor((Math.random() * bounceShipRandomNumber) + 10), 4); 
 //player ship*******************
-const ship = new Ship(20, 40, pd, "S", 0, 600, shipYStart, 0);
+const ship = new Ship(20, 40, pd, "S", 0, shipXStart, shipYStart, 0);
 //start player ship**************
-const ship1 = new Ship(40, 60, pd, "S", 3, 600, shipYStart, 5);
+const ship1 = new Ship(40, 60, pd, "S", 3, shipXStart, shipYStart, 5);
 //player missile *****************
 const missile = new Missile(10, 15, mi, "U", 10, ship.x, ship.y, Math.floor((Math.random() * 100) + 1));
 let game;
@@ -538,45 +604,45 @@ const explodeStay = (set) => { //draws large explosion on canvas.
 };
 const startCanvas = () => { //very start of game screen settings. 
     ctx1.clearRect(0, 0, WIDTH, HEIGHT);
-    ctx1.fillText(startTextA, 500, 30);
-    ctx1.fillText(startTextB, 500, 60);
-    ctx1.fillText(startTextC, 500, 90);
-    ctx1.fillText(startTextD, 500, 120);
-    ctx1.fillText(startTextE, 500, 150);
+    ctx1.fillText(startTextA, canvasCenter, 30);
+    ctx1.fillText(startTextB, canvasCenter, 50);
+    ctx1.fillText(startTextC, canvasCenter, 70);
+    ctx1.fillText(startTextD, canvasCenter, 90);
+    // ctx1.fillText(startTextE, canvasCenter, 150);
     ctx1.fillStyle = "#ff7f50"; 
-    ctx1.fillText(startTextH, 500, 200);
-    ctx1.fillText(startTextH, 500, 200);
-    ctx1.fillText(enemyDText, 500, 270);
-    ctx1.fillText(enemyD, 500, 300);
-    ctx1.fillText(enemyEscapeText, 500, 330);
-    ctx1.fillText(enemyEscape, 500, 360); 
-    ctx1.fillText("Time Played: " + mainTimerCounterDisplay + " : " + mainCounter0 + mainTimerCounter, 500, 390);
+    ctx1.fillText(startTextH, canvasCenter, 114);
+    ctx1.fillText(startTextH, canvasCenter, 114);
+    ctx1.fillText(enemyDText, canvasCenter, 140);
+    ctx1.fillText(enemyD, canvasCenter, 160);
+    ctx1.fillText(enemyEscapeText, canvasCenter, 180);
+    ctx1.fillText(enemyEscape, canvasCenter, 200); 
+    ctx1.fillText("Time Played: " + mainTimerCounterDisplay + " : " + mainCounter0 + mainTimerCounter, canvasCenter, 220);
 
-    ctx1.fillText('Boosts', 130, 70);
-    ctx1.drawImage(mc, 70, 100, 50, 50);
-    ctx1.fillText('=  Invisibility', 185, 135);  // x, y
-    ctx1.drawImage(ba, 80, 180, 30, 50);
-    ctx1.fillText('=  Overcharge', 190, 210);
-    ctx1.drawImage(up, 70, 260, 50, 50);
-    ctx1.fillText('=  Heal', 165, 290);
+    ctx1.fillText('Boosts', 90, 280);
+    ctx1.drawImage(mc, 10, 300, 50, 50);
+    ctx1.fillText('=  Invisibility', 110, 333);  // x, y
+    ctx1.drawImage(ba, 20, 380, 30, 50);
+    ctx1.fillText('=  Overcharge', 115, 412);
+    ctx1.drawImage(up, 10, 460, 50, 50);
+    ctx1.fillText('=  Heal', 95, 490);
 
-    ctx1.fillText('Screen Controls:', 855, 40);
-    ctx1.fillText('F = Fire', 800, 70);
-    ctx1.fillText('M = Missile', 900, 70);
-    ctx1.fillText('L = Left', 800, 100);
-    ctx1.fillText('R = Right', 900, 100);
-    ctx1.fillText('C = Chaff', 803, 130);
-    ctx1.fillText('D = Dodge', 903, 130);
-    ctx1.fillText('H = Summon Helpers', 855, 160);
+    ctx1.fillText('Screen Controls:', 268, 280); 
+    ctx1.fillText('F = Fire -', 243, 310);
+    ctx1.fillText('M = Missile', 320, 310);
+    ctx1.fillText('L = Left -', 243, 332);
+    ctx1.fillText('R = Right', 313, 332);
+    ctx1.fillText('C = Chaff -', 248, 354);
+    ctx1.fillText('D = Dodge', 330, 354);
+    ctx1.fillText('H = Summon Helpers', 286, 376);
 
-    ctx1.fillText('Keyboard Controls:', 855, 250);
-    ctx1.fillText('Space = Fire', 800, 280);
-    ctx1.fillText('S = Missile', 920, 280);
-    ctx1.fillText('A = Left', 800, 310);
-    ctx1.fillText('D = Right', 900, 310);
-    ctx1.fillText('W = Chaff', 790, 340);
-    ctx1.fillText('Q & E = Dodge', 915, 340);
-    ctx1.fillText('B = Summon Helpers', 857, 370);
+    ctx1.fillText('Keyboard Controls:', 278, 420);
+    ctx1.fillText('Space = Fire -', 258, 452);
+    ctx1.fillText('S = Missile', 353, 452);
+    ctx1.fillText('A = Left -', 240, 474);
+    ctx1.fillText('D = Right', 310, 474);
+    ctx1.fillText('W = Chaff -', 246, 496);
+    ctx1.fillText('Q & E = Dodge', 343, 496);
+    ctx1.fillText('B = Summon Helpers', 283, 518);
 
     let set = startShip;
     let set1 = ship1;
@@ -603,8 +669,8 @@ const startCanvas = () => { //very start of game screen settings.
         let pos1 = set.x; 
         let pos2 = set.y;
         ctx1.drawImage(bm, pos1 - 100, pos2 - 100, 200, 200); //minus ship width from width of explosion. 
-        set.x = Math.floor((Math.random() * 800) + 100);
-        set.y = Math.floor((Math.random() * 200) + 100);
+        set.x = Math.floor((Math.random() * bounceShipRandomNumber) + 10);
+        set.y = Math.floor((Math.random() * bounceShipRandomNumber) + 10);
     }
     if (isHitA === false) {
         set.img = fb;
@@ -792,11 +858,11 @@ const start = () => { //main game loop 40ms interval
     ctx.fillStyle = "#6495ed";
     mainTimerCounter.toString(); //so I remember how to change a value to a string. 
     mainTimerCounterDisplay.toString();
-    ctx.fillText(mainTimerCounterDisplay + " : " + mainCounter0 + mainTimerCounter, 500, 50);
-    ctx.fillText(enemyDText, 150, shipEscapeDestroyTextDisplayHeight);
-    ctx.fillText(enemyD, 300, shipEscapeDestroyTextDisplayHeight);  //displays enemy's destroyed. 
-    ctx.fillText(enemyEscapeText, 750, shipEscapeDestroyTextDisplayHeight); 
-    ctx.fillText(enemyEscape, 920, shipEscapeDestroyTextDisplayHeight);  //displays enemy's escaped.
+    ctx.fillText(mainTimerCounterDisplay + " : " + mainCounter0 + mainTimerCounter, 200, 50);
+    ctx.fillText(enemyDText, 150, 510);
+    ctx.fillText(enemyD, 265, 510);  //displays enemy's destroyed. 
+    ctx.fillText(enemyEscapeText, 157, 540); 
+    ctx.fillText(enemyEscape, 265, 540);  //displays enemy's escaped.
     document.getElementById("time").value = timeBox;
     document.getElementById("health").value = shield;
 

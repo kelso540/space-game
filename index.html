@@ -4,70 +4,12 @@
 <html lang="en" xmlns="https://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space Game</title>
     <link rel="stylesheet" href="canvasStyle.css">
     <script src="canvasJava.js" defer></script>
 </head>
 <body>
-
-    <div class="startContainer" id="startContainer"> <!-- starter container -->
-        <div class="power">
-            <strong class="powerText">POWER</strong><button class="buttonPower"></button>
-        </div>
-        <div class="canvasBtnContainer">
-            <canvas id="ctx1" width="1000" height="400"></canvas>
-        </div>
-        <div class="shield">
-            <meter class="shieldBar" id="shield1" value="0" min="0" max="300"></meter>  
-            <!-- <br> -->
-            <meter class="backupBar" id="shield1" value="0" min="0" max="100"></meter>
-        </div>
-        <div class="buttons"> 
-            <button class="buttonF btn" id="btnListen1"><strong class="buttonText">F</strong></button>
-            <button class="buttonL btn" id="btnListen3"><strong class="buttonText">M</strong></button>
-            <button class="buttonChaff btn" id="btnListen5"><strong class="buttonText">L</strong></button>
-            <button class="buttonHelp btn" id="btnListen6"><strong class="buttonText">R</strong></button>
-            <button class="buttonM btn" id="btnListen2"><strong class="buttonText">C</strong></button> 
-            <button class="buttonR btn" id="btnListen4"><strong class="buttonText">H</strong></button>
-            <button class="buttonDodge btn" id="btnListen7"><strong class="buttonText">D</strong></button>
-        </div>
-            <div id="hideA">
-            <strong class="areYouSure">Are you Sure?</strong>
-            <br>
-            <button class="buttonR padding" onclick="begin();"><strong class="buttonText">Yes</strong></button> <button class="buttonF padding" onclick="bringDownAreYouSure();"><strong class="buttonText">No</strong></button>
-        </div>
-    </div>
-
-        <div class="container" id="container"> <!-- main game container -->
-            <div class="power">
-                <strong class="powerText">POWER ON</strong><button class="buttonPower"></button>
-            </div>
-            <canvas id="ctx" width="1000" height="400"></canvas>
-            <div class="shield">
-                <meter class="shieldBar" id="shield" value="300" min="0" max="300" low="70" high="150" optimum="300"></meter>
-                <br>
-                <meter class="backupBar" id="shield2" value="0" min="0" max="100" low="20" high="50" optimum="100"></meter>
-            </div>
-            <div class="buttons">
-                <button class="buttonF btn" id="F"><strong class="buttonText">F</strong></button>
-                <button class="buttonM btn" id="changeM"><strong class="buttonText">M</strong></button>
-                <button class="buttonL btn" id="L" onclick="moveL(ship)"><strong class="buttonText">L</strong></button>
-                <button class="buttonR btn" id="R" onclick="moveR(ship)"><strong class="buttonText">R</strong></button>
-                <button class="buttonChaff btn" id="C"><strong class="buttonText">C</strong></button> 
-                <button class="buttonHelp btn" id="helpButton"><strong class="buttonText">H</strong></button>
-                <button class="buttonDodge btn" id="D"><strong class="buttonText">D</strong></button>
-            </div>
-        </div>
-        
-        <div class="f5">
-            <p class="footerText">&copy; 2022 kelsojacks@outlook.com</p>
-        </div>
-        
-        <div class="hide">
-            <input type="text" id="time" class="buttonL" value="0" readonly>
-            <input type="text" id="delTime" class="buttonL" value="0" readonly>
-            <input type="text" id="health" class="buttonL" value="0" readonly>
-        </div>
+    <div id="root"></div>
 </body>
 </html>
