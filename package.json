@@ -1,0 +1,11 @@
+{
+  "name": "space-game",
+  "version": "1.0.0",
+  "description": "arcade style space invaders like game",
+  "main": "canvasJava.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": " Kelsey Jackson",
+  "license": "ISC"
+}
