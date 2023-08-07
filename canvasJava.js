@@ -297,9 +297,8 @@ class Asteroid {
     }
 };
 class Sound {
-    constructor(src, time){
-        this.src = src;
-        this.time = time;  
+    constructor(src){
+        this.src = src;  
         this.sound = document.createElement("audio");
         this.sound.setAttribute("preload", "auto");
         this.sound.setAttribute("controls", "none");
@@ -311,26 +310,26 @@ class Sound {
         this.sound.play();
     }
 }
-const shipFire = new Sound("Sounds/newChaffFire.mp4", 200);
-const enemyFire = new Sound("Sounds/enemyLaser.mp4", 200);
-const enemyBlow = new Sound("Sounds/newEnemyExplode_1.mp4", 300);
-const upgradeSpawn = new Sound("Sounds/upgradeSpawn.mp4", 300);
-const enemySpawn = new Sound("Sounds/newEnemySpawn.mp4", 300);
-const shipMoveLR = new Sound("Sounds/shipMove.mp4", 100);
-const getUpgrade = new Sound("Sounds/getUpgrade.mp4", 500);
-const enemyHit = new Sound("Sounds/enemyBlowPuff.mp4", 200);
-const missileFireSound = new Sound("Sounds/missileShot.mp4", 300);
+const shipFire = new Sound("Sounds/newChaffFire.mp4");
+const enemyFire = new Sound("Sounds/enemyLaser.mp4");
+const enemyBlow = new Sound("Sounds/newEnemyExplode_1.mp4");
+const upgradeSpawn = new Sound("Sounds/upgradeSpawn.mp4");
+const enemySpawn = new Sound("Sounds/newEnemySpawn.mp4");
+const shipMoveLR = new Sound("Sounds/shipMove.mp4");
+const getUpgrade = new Sound("Sounds/getUpgrade.mp4");
+const enemyHit = new Sound("Sounds/enemyBlowPuff.mp4");
+const missileFireSound = new Sound("Sounds/missileShot.mp4");
 const shipHit = new Sound("Sounds/shipEnemyHit.mp4");
 const missileExplode = new Sound("Sounds/newEnemyExplode.mp4");
-const travel = new Sound("Sounds/travel.mp4", 20000);   
-const chaffLaunch = new Sound("Sounds/newChaffFire_1.mp4", 300);
-const missileLaunch = new Sound("Sounds/newPlayerMissileFire.mp4", 500);
+const travel = new Sound("Sounds/travel.mp4");   
+const chaffLaunch = new Sound("Sounds/newChaffFire_1.mp4");
+const missileLaunch = new Sound("Sounds/newPlayerMissileFire.mp4");
 const endGameSound = new Sound("Sounds/newGameEndSound.mp4");
-const overchargeUpgrade = new Sound("Sounds/newOverchargeUpgradeSound.mp4", 500);
-const opacityUpgrade = new Sound("Sounds/newOpacityUpgradeGet.mp4", 400);
-const helperAround = new Sound("Sounds/newHelperAround.mp4", 28000);
-const laserHit = new Sound("Sounds/newLaserFireHit.mp4", 200);
-const dodgeSound = new Sound("Sounds/dodgeSound.mp4", 100);
+const overchargeUpgrade = new Sound("Sounds/newOverchargeUpgradeSound.mp4");
+const opacityUpgrade = new Sound("Sounds/newOpacityUpgradeGet.mp4");
+const helperAround = new Sound("Sounds/newHelperAround.mp4");
+const laserHit = new Sound("Sounds/newLaserFireHit.mp4");
+const dodgeSound = new Sound("Sounds/dodgeSound.mp4");
 class Missile extends Asteroid { };
 class Ship extends Asteroid { };
 class Projectile extends Asteroid { };
