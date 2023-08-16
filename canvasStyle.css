@@ -70,11 +70,18 @@ a {
     margin: 0;  
     width: 90%;
 }
+.shield{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .shieldBar{
     position: relative;
     width: 80%;
     bottom: 5px;
     height: 40px;
+    border: solid;
 }
 .backupBar{
     position: relative;
@@ -88,7 +95,7 @@ a {
 .buttons{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     margin: auto;
 }
@@ -139,6 +146,7 @@ a {
     color: transparent;
 }
 .buttonChaff{
+    display: none;
     background-color: blue;
     background-image: linear-gradient(rgb(255, 251, 0), rgb(60, 59, 14));
 }
@@ -155,6 +163,7 @@ a {
     color: transparent;
 }
 .buttonDodge{
+    display: none;
     background-color: blue;  
     background-image: linear-gradient(rgb(0, 136, 255), rgb(1, 61, 91));
 }

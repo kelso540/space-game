@@ -18,13 +18,13 @@ document.querySelector("#root").innerHTML = `<div class="mainContainer">
             <meter class="backupBar" id="shield1" value="0" min="0" max="100"></meter>
         </div>
         <div class="buttons"> 
-            <button class="buttonChaff btn" id="btnListen5"><strong class="buttonText">L</strong></button>
+            <button class="buttonM btn" id="btnListen5"><strong class="buttonText"><</strong></button>
             <button class="buttonF btn" id="btnListen1"><strong class="buttonText">F</strong></button>
             <button class="buttonL btn" id="btnListen3"><strong class="buttonText">M</strong></button>
-            <button class="buttonM btn" id="btnListen2"><strong class="buttonText">C</strong></button> 
+            <button class="buttonChaff btn" id="btnListen2"><strong class="buttonText">C</strong></button> 
             <button class="buttonR btn" id="btnListen4"><strong class="buttonText">H</strong></button>
             <button class="buttonDodge btn" id="btnListen7"><strong class="buttonText">D</strong></button>
-            <button class="buttonHelp btn" id="btnListen6"><strong class="buttonText">R</strong></button>
+            <button class="buttonHelp btn" id="btnListen6"><strong class="buttonText">></strong></button>
         </div>
         <div id="hideA">
             <strong class="areYouSure">Are you Sure?</strong>
@@ -42,17 +42,14 @@ document.querySelector("#root").innerHTML = `<div class="mainContainer">
     
         <div class="shield">
             <meter class="shieldBar" id="shield" value="300" min="0" max="300" low="70" high="150" optimum="300"></meter>
-            <br>
             <meter class="backupBar" id="shield2" value="0" min="0" max="100" low="20" high="50" optimum="100"></meter>
         </div>
         <div class="buttons">
-            <button class="buttonL btn" id="L" onclick="moveL(ship)"><strong class="buttonText">L</strong></button>
+            <button class="buttonL btn" id="L" onclick="moveL(ship)"><strong class="buttonText"><</strong></button>
             <button class="buttonF btn" id="F"><strong class="buttonText">F</strong></button>
             <button class="buttonM btn" id="changeM"><strong class="buttonText">M</strong></button>
-            <button class="buttonChaff btn" id="C"><strong class="buttonText">C</strong></button> 
             <button class="buttonHelp btn" id="helpButton"><strong class="buttonText">H</strong></button>
-            <button class="buttonDodge btn" id="D"><strong class="buttonText">D</strong></button>
-            <button class="buttonR btn" id="R" onclick="moveR(ship)"><strong class="buttonText">R</strong></button>
+            <button class="buttonR btn" id="R" onclick="moveR(ship)"><strong class="buttonText">></strong></button>
         </div>
     </div>
 
@@ -72,6 +69,11 @@ document.querySelector("#root").innerHTML = `<div class="mainContainer">
     <input type="text" id="delTime" class="buttonL" value="0" readonly>
     <input type="text" id="health" class="buttonL" value="0" readonly>
 </div>`; 
+
+{/* 
+    <button class="buttonDodge btn" id="D"><strong class="buttonText">D</strong></button>
+    <button class="buttonChaff btn" id="C"><strong class="buttonText">C</strong></button> 
+ */}
 
 setInterval(()=>{
     document.getElementById("keyboardA").src = "Artwork/icons8-keyboard-96.png"; 
@@ -653,18 +655,14 @@ const startCanvas = () => { //very start of game screen settings.
     ctx1.fillText('M = Missile', 320, 310);
     ctx1.fillText('L = Left -', 243, 332);
     ctx1.fillText('R = Right', 313, 332);
-    ctx1.fillText('C = Chaff -', 248, 354);
-    ctx1.fillText('D = Dodge', 330, 354);
-    ctx1.fillText('H = Summon Helpers', 286, 376);
+    ctx1.fillText('H = Summon Helpers', 286, 354);
 
     ctx1.fillText('Keyboard Controls:', 278, 420);
     ctx1.fillText('Space = Fire -', 258, 452);
     ctx1.fillText('S = Missile', 353, 452);
     ctx1.fillText('A = Left -', 240, 474);
     ctx1.fillText('D = Right', 310, 474);
-    ctx1.fillText('W = Chaff -', 246, 496);
-    ctx1.fillText('Q & E = Dodge', 343, 496);
-    ctx1.fillText('B = Summon Helpers', 283, 518);
+    ctx1.fillText('B = Summon Helpers', 283, 496);
 
     let set = startShip;
     let set1 = ship1;
